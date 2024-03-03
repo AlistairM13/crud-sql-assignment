@@ -18,7 +18,7 @@ Files are stored in firebase, so you need to have access to firebase store follo
   - Choose test mode for now and location closest to you (I have chosen asia-south1) and hit `done`
 - Now you are done with the firebase setup
 
-Open the .env file in backend/.env
+Create a .env file in `backend/`
 and fill these values (the ones prefixed with FIREBASE\_ are found in you firebaseConfig that you copied) :
 
 ```sh
@@ -32,28 +32,30 @@ FIREBASE_APP_ID =
 PORT =
 ```
 
-Run the frontend:
+Run the backend
 
 ```sh
-cd frontend
+cd backend
 ```
 
 ```sh
 pnpm install
-pnpm dev
+npx prisma generate --schema=./src/prisma/schema.prisma
+pnpm start
 ```
 
 or
 
 ```sh
 npm install
-npm run dev
+npx prisma generate --schema=./src/prisma/schema.prisma
+npm start
 ```
 
-Run the backend
+Run the frontend:
 
 ```sh
-cd backend
+cd frontend
 ```
 
 ```sh
