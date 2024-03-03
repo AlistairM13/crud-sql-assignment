@@ -1,5 +1,8 @@
 import asyncHandler from "express-async-handler";
 import prisma from "../prisma/prismaClient";
+import { uploadFileToStorage } from "../utils/uploadToFirebase";
+import dayjs from "dayjs";
+import path from "path";
 
 export const fetchAllUsers = asyncHandler(async (req, res) => {
   const users = await prisma.user.findMany();
@@ -41,6 +44,28 @@ export const createNewUser = asyncHandler(async (req, res) => {
     throw new Error("Missing required parameters");
   }
 
+  // @ts-ignore
+  if (!req.files || !req.files["image"] || !req.files["pdf"]) {
+    res.status(400);
+    throw new Error("Missing files");
+  }
+
+  // @ts-ignore
+  const image = req.files["image"][0];
+  // @ts-ignore
+  const pdf = req.files["pdf"][0];
+
+  const imageName = `${name}_photo_${dayjs().format("DMYYYYHHmmss")}${path
+    .extname(image.originalname)
+    .toLowerCase()}`;
+
+  const pdfName = `${name}_certificate_${dayjs().format("DMYYYYHHmmss")}${path
+    .extname(pdf.originalname)
+    .toLowerCase()}`;
+
+  const imageDownloadUrl = await uploadFileToStorage(image, imageName);
+  const pdfDownloadUrl = await uploadFileToStorage(pdf, pdfName);
+
   const response = await prisma.user.create({
     data: {
       name: name,
@@ -49,8 +74,8 @@ export const createNewUser = asyncHandler(async (req, res) => {
       address: address,
       pan_no: panNumber,
       aadhar_no: aadhaarNumber,
-      certificate_path: "",
-      photo_path: "",
+      certificate_path: pdfDownloadUrl,
+      photo_path: imageDownloadUrl,
     },
   });
 

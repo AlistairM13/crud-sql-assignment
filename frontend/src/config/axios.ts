@@ -9,20 +9,4 @@ instance.interceptors.request.use((config) => {
   return originalRequest;
 });
 
-// instance.interceptors.response.use(
-//     (response) => response,
-//     (error: AxiosError) => {
-//         if (error.response?.status === 401) {
-//             Toast.show({
-//                 swipeable: true,
-//                 type: "error",
-//                 text1: "Session duration expired"
-//             });
-//             useUserStore.setState({ user: undefined, token: undefined });
-//         }
-
-//         return Promise.reject(error);
-//     }
-// );
-
 export default instance;
