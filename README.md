@@ -1,7 +1,12 @@
-# How to run
+# Watch demo
+
+<div align="center">
+<img src="https://github.com/AlistairM13/crud-sql-assignment/assets/105148183/c1610582-e0d2-441f-99cd-37ef06d1406d" width="100%" height="auto"/>
+</div>
+
+## Run locally
 
 Clone the repository:
-
 ```sh
 git clone https://github.com/AlistairM13/crud-sql-assignment.git
 ```
