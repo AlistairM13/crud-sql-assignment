@@ -1,4 +1,10 @@
-# How to run
+# Demo
+
+<div align="center" width="100%" height="auto">
+  <img alt="Demo" src="./demo.gif" />
+</div>
+
+## How to run
 
 Clone the repository:
 
