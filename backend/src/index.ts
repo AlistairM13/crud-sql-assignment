@@ -19,5 +19,3 @@ app.use("/api/users", userRouter);
 const server = http.createServer(app);
 
 server.listen(PORT, () => console.log("Server listening on PORT " + PORT));
-
-export default app;
